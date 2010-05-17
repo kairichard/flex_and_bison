@@ -1,19 +1,36 @@
 %{
-
+    enum yytokentype {
+        NUMBER  = 258,
+        PLUS    = 259,
+        MINUS   = 260,
+        MULTI   = 261,
+        DIV     = 262,
+        ABS     = 263,
+        EOL     = 264
+    };
+    int yylval;
 %}
 
 %%
-"+" { printf("PLUS\n"); }
-"-" { printf("MINUS\n"); }
-"*" { printf("TIMES\n"); }
-"/" { printf("DIVISION\n"); }
-"|" { printf("ABS\n"); }
-[0-9]+ { printf("NUMBER %s\n",yytext); }
-\n  { printf("NEWLINE"); }
+"+"     { return PLUS; }
+"-"     { return MINUS; }
+"*"     { return MULTI; }
+"/"     { return DIV; }
+"|"     { return ABS; }
+[0-9]+  { yylval = atoi(yytext); return NUMBER; }
+\n      { return EOL; }
 [ \t]   { /*IGNORE*/ }
 .       { printf("UNKOWN CHAR %s",yytext); }
 %%
                                        
 main(int argc, char **argv){
-    yylex();
+    int token;
+    while(token = yylex()){
+        printf("%d",token);
+        if(token == NUMBER){ 
+            printf("= %d\n",yylval);
+        }else{
+            printf("\n");
+        }        
+    }
 }
