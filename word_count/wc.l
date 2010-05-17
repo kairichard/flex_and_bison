@@ -14,5 +14,5 @@ int lines = 0;
 
 main(int argc, char **argv){
     yylex();
-    printf("%8d%8d%8d\n",lines,words,chars);
+    printf(" Lines:%8d words:%8d chars:%8d\n",lines,words,chars);
 }
