@@ -6,6 +6,7 @@
 
 %token NUMBER 
 %token PLUS MINUS MULTI DIV ABS
+%token CP OP
 %token EOL
 
 %% 
@@ -26,7 +27,8 @@ factor: term
 ;
 
 term: NUMBER 
-    | ABS term { $$ = ($2 >= 0 ? $2 : -$2); }
+    | ABS term  { $$ = ($2 >= 0 ? $2 : -$2); }
+    | OP exp CP { $$ = $2; }
 %%
 
 main(int argc, char **argv){
