@@ -13,7 +13,7 @@
 /* BNF-GRAMMER */
 
 statement: /* nothing */
-    | statement exp EOL { printf(" = %d\n", $2); }
+    | statement exp EOL { printf("= %d\n", $2); }
 ;
 
 exp: factor 
